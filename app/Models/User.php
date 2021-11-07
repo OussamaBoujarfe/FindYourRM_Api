@@ -15,10 +15,18 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
+     *     
      * @var string[]
      */
     protected $fillable = [
         'name',
+        'nationality',
+        'gender',
+        'birthday',
+        'isStudent',
+        'isEmployee',
+        'additional_1',
+        'additional_2',
         'email',
         'password',
     ];
