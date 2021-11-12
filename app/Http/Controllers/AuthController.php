@@ -12,28 +12,25 @@ class AuthController extends Controller
     {
        $fields = $request->validate([
            'name'     => 'required|string',
-           'nationality'=> 'required|string',
+        /*   'nationality'=> 'required|string',
            'gender' => 'required|string|max:1',
-           'birthday' =>'required|date',
-           'isStudent' => 'required|boolean',
-           'isEmployee' => 'required|boolean',
-           'additional_1' => 'required|string',
-           'additional_2' => 'required|string',
+           'birthday' =>'required|date',*/
+           
            'email'    => 'required|string|unique:users,email',
-           'password' => 'required|string|confirmed'
+           'password' => 'required|string'
                                     ]);
 
        $user = User::create([
            'name' => $fields['name'],
            'email' => $fields['email'],
            'password' => bcrypt($fields['password']),
-           'nationality' => $fields['nationality'],
+         /*  'nationality' => $fields['nationality'],
             'gender' => $fields['gender'],
-            'birthday' => $fields['birthday'],
-            'isStudent' => $fields['isStudent'],
+            'birthday' => $fields['birthday'],*/
+        /*    'isStudent' => $fields['isStudent'],
             'isEmployee' => $fields['isEmployee'],
             'additional_1' => $fields['additional_1'],
-            'additional_2' => $fields['additional_2']  
+            'additional_2' => $fields['additional_2']  */
                             ]);
                          
 

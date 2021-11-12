@@ -20,10 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('gender');
             $table->date('birthday');
             $table->string('email')->unique();
-            $table->boolean('isStudent');
+          /*$table->boolean('isStudent');
             $table->boolean('isEmployee');
             $table->string('additional_1');
-            $table->string('additional_2');
+            $table->string('additional_2');*/
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
