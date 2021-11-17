@@ -1,5 +1,8 @@
 <?php
-
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NewPasswordController;
+use App\Http\Controllers\EmailVerificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +16,35 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//public routes
+//Route::resource('products', ProductController::class);
+Route::get('/products/search/{name}',[ProductController::class,'search']);
+Route::get('/products',[ProductController::class,'index']);
+Route::get('/products/{id}',[ProductController::class,'show']);
+Route::post('/register',[AuthController::class,'register']);
+Route::post('/login',[AuthController::class,'login']);
+Route::post('/forgot-password',[NewPasswordController::class,'forgotPassword']);
+Route::post('/reset-password',[NewPasswordController::class,'reset']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
+
+//protected routes
+Route::group(['middleware' => ['auth:sanctum']], function () 
+{
+Route::post('/products',[ProductController::class,'store']);
+Route::put('/products/{id}',[ProductController::class,'update']);
+Route::delete('/products/{id}',[ProductController::class,'destroy']);
+Route::post('/logout',[AuthController::class,'logout']);
+
+Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail']);
+Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
+});
+
+/*
+;
+
+*/
+
+Route::middleware('auth:sanctum','verified')->get('/user', function (Request $request) {
     return $request->user();
 });
