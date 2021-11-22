@@ -20,6 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('gender')->nullable();;
             $table->date('birthday')->nullable();;
             $table->string('email')->unique();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            /* TODO: List of passions, monthly max rent, roommate prefs. (gender, agerange)
           /*$table->boolean('isStudent');
             $table->boolean('isEmployee');
             $table->string('additional_1');

@@ -3,6 +3,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewPasswordController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,7 @@ Route::post('email/verification-notification', [EmailVerificationController::cla
 Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
 });
 
+Route::post('/setup-account/{id}',[UserController::class,'setup']);
 /*
 ;
 
