@@ -26,7 +26,6 @@ class CreateUsersTable extends Migration
             $table->json('passions')->nullable();
             $table->integer('max_rent')->nullable();
             $table->json('preferences')->nullable();
-            /* TODO: List of passions, monthly max rent, roommate prefs. (gender, agerange)
           /*$table->boolean('isStudent');
             $table->boolean('isEmployee');
             $table->string('additional_1');

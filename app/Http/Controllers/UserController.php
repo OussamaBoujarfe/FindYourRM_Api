@@ -87,11 +87,10 @@ class UserController extends Controller
     public function setup(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
-        if ($request->type == "user")
+        if ($user->type == "user")
         {
             $user->gender = $request->gender;
-            $user->birthday = Carbon::parse($request->date)->format("Y-d-m");
+            $user->birthday = Carbon::parse($request->birthday)->format("Y-d-m");
             $user->passions = $request->passions;
             $user->country = $request->country;
             $user->city = $request->city;
@@ -99,6 +98,18 @@ class UserController extends Controller
             $user->preferences = [$request->preference["preferenced_gender"], $request->preference["preferenced_agerange"]];
 
             $user->save();
+        }
+        elseif ($user->type == "owner")
+        {
+            $user->gender = $request->gender;
+            $user->birthday = Carbon::parse($request->birthday)->format("Y-d-m");
+            $user->preferences = [$request->preference["preferenced_gender"], $request->preference["preferenced_agerange"]];
+
+            $user->save();
+        }
+        else
+        {
+            return response()->json(['bad_request' => 'bad_request'], 400);
         }
         return response()->json(['success' => 'success'], 200);
     }
