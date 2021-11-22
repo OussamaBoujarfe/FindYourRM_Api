@@ -16,12 +16,16 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('type');
             $table->string('nationality')->nullable();
             $table->string('gender')->nullable();;
             $table->date('birthday')->nullable();;
             $table->string('email')->unique();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
+            $table->json('passions')->nullable();
+            $table->integer('max_rent')->nullable();
+            $table->json('preferences')->nullable();
             /* TODO: List of passions, monthly max rent, roommate prefs. (gender, agerange)
           /*$table->boolean('isStudent');
             $table->boolean('isEmployee');

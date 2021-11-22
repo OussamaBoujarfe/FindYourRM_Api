@@ -88,12 +88,18 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->gender = $request->gender;
-        $user->birthday = Carbon::parse($request->date)->format("Y-d-m");
-        $user->country = $request->country;
-        $user->city = $request->city;
+        if ($request->type == "user")
+        {
+            $user->gender = $request->gender;
+            $user->birthday = Carbon::parse($request->date)->format("Y-d-m");
+            $user->passions = $request->passions;
+            $user->country = $request->country;
+            $user->city = $request->city;
+            $user->max_rent = $request->max_rent;
+            $user->preferences = [$request->preference["preferenced_gender"], $request->preference["preferenced_agerange"]];
 
-        $user->save();
+            $user->save();
+        }
         return response()->json(['success' => 'success'], 200);
     }
 }
