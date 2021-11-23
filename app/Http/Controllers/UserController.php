@@ -95,7 +95,10 @@ class UserController extends Controller
             $user->country = $request->country;
             $user->city = $request->city;
             $user->max_rent = $request->max_rent;
-            $user->preferences = [$request->preference["preferenced_gender"], $request->preference["preferenced_agerange"]];
+            $preferences = [];
+            array_push($preferences, $request->preferenced_gender);
+            array_push($preferences, $request->preferenced_agerange);
+            $user->preferences = $preferences;
 
             $user->save();
         }
@@ -103,7 +106,10 @@ class UserController extends Controller
         {
             $user->gender = $request->gender;
             $user->birthday = Carbon::parse($request->birthday)->format("Y-d-m");
-            $user->preferences = [$request->preference["preferenced_gender"], $request->preference["preferenced_agerange"]];
+            $preferences = [];
+            array_push($preferences, $request->preferenced_gender);
+            array_push($preferences, $request->preferenced_agerange);
+            $user->preferences = $preferences;
 
             $user->save();
         }
