@@ -17,6 +17,7 @@ class AuthController extends Controller
            'birthday' =>'required|date',*/
            
            'email'    => 'required|string|unique:users,email',
+           'type' => 'required|string',
            'password' => 'required|string'
                                     ]);
 
@@ -24,6 +25,7 @@ class AuthController extends Controller
            'name' => $fields['name'],
            'email' => $fields['email'],
            'password' => bcrypt($fields['password']),
+           'type' => $fields['type'],
          /*  'nationality' => $fields['nationality'],
             'gender' => $fields['gender'],
             'birthday' => $fields['birthday'],*/
