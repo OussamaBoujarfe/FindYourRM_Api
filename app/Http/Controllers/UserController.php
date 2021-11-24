@@ -117,6 +117,6 @@ class UserController extends Controller
         {
             return response()->json(['bad_request' => 'bad_request'], 400);
         }
-        return response()->json(['success' => 'success'], 200);
+        return response()->json(['user' => $user], 200);
     }
 }
