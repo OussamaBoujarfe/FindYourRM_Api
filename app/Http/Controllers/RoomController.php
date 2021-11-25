@@ -96,10 +96,11 @@ class RoomController extends Controller
         $preferences = [];
         array_push($preferences, $request->preferenced_gender);
         array_push($preferences, $request->preferenced_agerange);
-        $room->preferences = json_encode($preferences);
+        $room->preferences = $preferences;
         
         $room->save();
 
+        return $room;
     }
 
     public function all()
