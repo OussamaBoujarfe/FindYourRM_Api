@@ -106,4 +106,10 @@ class RoomController extends Controller
     {
         return Room::all();
     }
+
+    public function room($id)
+    {
+        $room = Room::findOrFail($id);
+        return $room;
+    }
 }
