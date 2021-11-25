@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Room;
 
 
 class RoomController extends Controller
@@ -88,7 +89,7 @@ class RoomController extends Controller
     {
         User::findOrFail($id);
 
-        $room = new \App\Models\Room();
+        $room = new Room();
         $room->rent = $request->rent;
         $room->owner_id = $id;
         $room->number_of_rooms = $request->number_of_rooms;
@@ -99,5 +100,10 @@ class RoomController extends Controller
         
         $room->save();
 
+    }
+
+    public function all()
+    {
+        return Room::all();
     }
 }
