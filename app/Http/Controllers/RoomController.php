@@ -112,4 +112,11 @@ class RoomController extends Controller
         $room = Room::findOrFail($id);
         return $room;
     }
+
+    public function delete($id)
+    {
+        $room = Room::findOrFail($id);
+        Room::find($id)->delete();
+        return $room;
+    }
 }
