@@ -41,7 +41,7 @@ class AuthController extends Controller
            'user' => $user,
            'token' => $token
                    ];
-
+        $user->sendEmailVerificationNotification();
        return response($response,201);
     }
 
