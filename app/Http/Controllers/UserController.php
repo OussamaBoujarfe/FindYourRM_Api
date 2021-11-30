@@ -134,4 +134,14 @@ class UserController extends Controller
         $user->rooms = $user->rooms;
         return $user;
     }
+
+    public function user($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->type != "user")
+        {
+            return response()->json(['bad_request' => 'bad_request'], 400);
+        }
+        return $user;
+    }
 }
