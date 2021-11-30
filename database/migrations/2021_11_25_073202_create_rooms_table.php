@@ -17,6 +17,8 @@ class CreateRoomsTable extends Migration
             $table->id();
             $table->unsignedInteger("owner_id")->nullable();
             $table->unsignedInteger("rent")->nullable();
+            $table->string("country")->nullable();
+            $table->string("city")->nullable();
             $table->unsignedInteger("number_of_rooms")->nullable();
             $table->json("preferences")->nullable();
             $table->timestamps();
