@@ -20,7 +20,6 @@ class CreateRoomsTable extends Migration
             $table->string("country")->nullable();
             $table->string("city")->nullable();
             $table->unsignedInteger("number_of_rooms")->nullable();
-            $table->json("preferences")->nullable();
             $table->timestamps();
         });
     }

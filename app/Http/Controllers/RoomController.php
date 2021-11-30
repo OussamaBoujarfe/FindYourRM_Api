@@ -95,10 +95,6 @@ class RoomController extends Controller
         $room->country = $request->country;
         $room->city = $request->city;
         $room->number_of_rooms = $request->number_of_rooms;
-        $preferences = [];
-        array_push($preferences, $request->preferenced_gender);
-        array_push($preferences, $request->preferenced_agerange);
-        $room->preferences = $preferences;
         
         $room->save();
 
