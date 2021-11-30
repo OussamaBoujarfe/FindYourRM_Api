@@ -91,7 +91,7 @@ class RoomController extends Controller
 
         $room = new Room();
         $room->rent = $request->rent;
-        $room->owner_id = $id;
+        $room->user_id = $id;
         $room->country = $request->country;
         $room->city = $request->city;
         $room->number_of_rooms = $request->number_of_rooms;

@@ -47,6 +47,7 @@ Route::post('/add-room/{id}',[RoomController::class,'add']);
 Route::get('/all-room',[RoomController::class,'all']);
 Route::get('/room/{id}',[RoomController::class,'room']);
 Route::get('/delete-room/{id}',[RoomController::class,'delete']);
+Route::get('/owner/{id}',[UserController::class,'owner']);
 /*
 ;
 

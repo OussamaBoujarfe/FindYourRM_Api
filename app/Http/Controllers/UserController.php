@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
 
+use function PHPSTORM_META\type;
+
 class UserController extends Controller
 {
     /**
@@ -120,5 +122,16 @@ class UserController extends Controller
             return response()->json(['bad_request' => 'bad_request'], 400);
         }
         return response()->json(['user' => $user], 200);
+    }
+
+    public function owner($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->type != "owner")
+        {
+            return response()->json(['bad_request' => 'bad_request'], 400);
+        }
+        $user->rooms = $user->rooms;
+        return $user;
     }
 }
