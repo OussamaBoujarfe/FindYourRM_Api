@@ -99,6 +99,7 @@ class UserController extends Controller
             array_push($preferences, $request->preferenced_gender);
             array_push($preferences, $request->preferenced_agerange);
             $user->preferences = $preferences;
+            $user->is_setup = true;
 
             $user->save();
         }
@@ -110,6 +111,7 @@ class UserController extends Controller
             array_push($preferences, $request->preferenced_gender);
             array_push($preferences, $request->preferenced_agerange);
             $user->preferences = $preferences;
+            $user->is_setup = true;
 
             $user->save();
         }

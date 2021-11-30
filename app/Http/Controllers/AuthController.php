@@ -26,6 +26,7 @@ class AuthController extends Controller
            'email' => $fields['email'],
            'password' => bcrypt($fields['password']),
            'type' => $fields['type'],
+           'is_setup' => false,
          /*  'nationality' => $fields['nationality'],
             'gender' => $fields['gender'],
             'birthday' => $fields['birthday'],*/
