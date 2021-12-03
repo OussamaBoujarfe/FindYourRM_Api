@@ -80,10 +80,12 @@ class AuthController extends Controller
 
        $token = $user->createToken('myapptoken')->plainTextToken;
 
+        $rooms = $user->rooms;
        $response = [
            'user' => $user,
            'token' => $token
                    ];
+
 
        return response($response,201);
     }
