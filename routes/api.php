@@ -3,9 +3,12 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewPasswordController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\RequestEmailController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoomController;
+use App\Mail\RequestMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +52,8 @@ Route::get('/room/{id}',[RoomController::class,'room']);
 Route::get('/delete-room/{id}',[RoomController::class,'delete']);
 Route::get('/owner/{id}',[UserController::class,'owner']);
 Route::get('/user/{id}',[UserController::class,'user']);
+
+Route::post('/request-email', [RequestEmailController::class,'send']);
 /*
 ;
 
