@@ -45,11 +45,13 @@ Route::post('/logout',[AuthController::class,'logout']);
 Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
 });
 
-Route::post('/setup-account/{id}',[UserController::class,'setup']);
 Route::post('/add-room/{id}',[RoomController::class,'add']);
 Route::get('/all-room',[RoomController::class,'all']);
 Route::get('/room/{id}',[RoomController::class,'room']);
 Route::get('/delete-room/{id}',[RoomController::class,'delete']);
+Route::post('/search-room', [RoomController::class,'search']);
+
+Route::post('/setup-account/{id}',[UserController::class,'setup']);
 Route::get('/owner/{id}',[UserController::class,'owner']);
 Route::get('/user/{id}',[UserController::class,'user']);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RequestMail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Room;
@@ -117,5 +118,27 @@ class RoomController extends Controller
         $room = Room::findOrFail($id);
         Room::find($id)->delete();
         return $room;
+    }
+
+    public function search(Request $request)
+    {
+        $rooms = Room::all()->values();
+        if (!is_null($request->country))
+        {
+            $rooms = $rooms->where("country", $request->country)->values();
+        }
+        if (!is_null($request->city))
+        {
+            $rooms = $rooms->where("city", $request->city)->values();
+        }
+        if (!is_null($request->max_rent))
+        {
+            $rooms = $rooms->where("rent", "<=", $request->max_rent)->values();
+        }
+        if (!is_null($request->min_number_of_rooms))
+        {
+            $rooms = $rooms->where("number_of_rooms", ">=", $request->min_number_of_rooms)->values();
+        }
+        return $rooms;
     }
 }
