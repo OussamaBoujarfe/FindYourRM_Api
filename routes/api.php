@@ -68,8 +68,11 @@ Route::post('/search-room', [RoomController::class,'search']);
 Route::post('/setup-account/{id}',[UserController::class,'setup']);
 Route::get('/owner/{id}',[UserController::class,'owner']);
 Route::get('/user/{id}',[UserController::class,'user']);
+Route::get('/match/{id}', [UserController::class,'match']);
 
 Route::post('/request-email', [RequestEmailController::class,'send']);
+
+
 /*
 ;
 

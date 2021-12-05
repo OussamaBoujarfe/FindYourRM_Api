@@ -151,4 +151,68 @@ class UserController extends Controller
         }
         return $user;
     }
+
+    private function match_gender($other_user, $user)
+    {
+        return ($other_user->preferences[0] == $user->gender && $user->preferences[0] == $other_user->gender);
+    }
+
+    private function match_age($other_user, $user)
+    {
+        $user_age = Carbon::parse($user->birthday)->age;
+        $user_min_age = $user->preferences[1][0];
+        $user_max_age = $user->preferences[1][1];
+
+        $other_user_age = Carbon::parse($other_user->birthday)->age;
+        $other_user_min_age = $other_user->preferences[1][0];
+        $other_user_max_age = $other_user->preferences[1][1];
+
+        return ($other_user_min_age <= $user_age && $user_age <= $other_user_max_age) && ($user_min_age <= $other_user_age && $other_user_age <= $user_max_age);
+    }
+
+    private function common_passions($other_user, $user)
+    {
+        return array_intersect($other_user->passions, $user->passions);
+    }
+
+    private function number_of_common_passions($other_user, $user)
+    {
+        return count($this->common_passions($other_user, $user));
+    }
+
+    private function similarity_percentage($other_user, $user)
+    {
+        return round(($this->number_of_common_passions($other_user, $user)*2)/(count($user->passions)+count($other_user->passions)) * 100);
+    }
+    
+    public function match($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->is_setup == false)
+        {
+            return response()->json(['bad_request' => 'no setup'], 400);
+        }
+        $all_other_setup_user = User::where("id", "!=", $id)->
+                            where("is_setup", true)->
+                            where("type", "user")->
+                            get();
+        $matches = [];
+        foreach ($all_other_setup_user as $other_user)
+        {
+            if ($this->match_gender($other_user, $user) &&
+                $this->match_age($other_user, $user) &&
+                $this->number_of_common_passions($other_user, $user) >= 1)
+                {
+                $other_user->common_passions = array_values($this->common_passions($other_user, $user));
+                $other_user->similarity = $this->similarity_percentage($other_user, $user);
+                array_push($matches, $other_user);
+            }
+        }
+        if (count($matches) > 0)
+        {
+
+            return $matches;
+
+        }
+    }
 }
