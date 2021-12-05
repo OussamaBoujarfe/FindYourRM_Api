@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->json('passions')->nullable();
             $table->integer('max_rent')->nullable();
             $table->json('preferences')->nullable();
+            $table->boolean('is_setup');
           /*$table->boolean('isStudent');
             $table->boolean('isEmployee');
             $table->string('additional_1');

@@ -26,6 +26,7 @@ class AuthController extends Controller
            'email' => $fields['email'],
            'password' => bcrypt($fields['password']),
            'type' => $fields['type'],
+           'is_setup' => false,
          /*  'nationality' => $fields['nationality'],
             'gender' => $fields['gender'],
             'birthday' => $fields['birthday'],*/
@@ -79,10 +80,12 @@ class AuthController extends Controller
 
        $token = $user->createToken('myapptoken')->plainTextToken;
 
+        $rooms = $user->rooms;
        $response = [
            'user' => $user,
            'token' => $token
                    ];
+
 
        return response($response,201);
     }

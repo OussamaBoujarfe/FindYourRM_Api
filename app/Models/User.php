@@ -25,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
      //   'nationality',
      //   'gender',
       //  'birthday',
-        
+        'is_setup',
         'email',
         'password',
         'type'
@@ -62,6 +62,8 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new ResetPasswordNotification($url));
     }
 
-
-
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }

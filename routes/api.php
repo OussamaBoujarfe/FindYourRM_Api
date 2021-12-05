@@ -3,10 +3,13 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewPasswordController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\RequestEmailController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RequestController;
+use App\Mail\RequestMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,7 +56,6 @@ Route::post('/logout',[AuthController::class,'logout']);
 Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
 });
 
-Route::post('/setup-account/{id}',[UserController::class,'setup']);
 Route::post('/add-room/{id}',[RoomController::class,'add']);
 Route::get('/all-room',[RoomController::class,'all']);
 Route::get('/matches/{id}',[UserController::class,'matches']);
@@ -61,6 +63,13 @@ Route::get('/create-match',[MatchController::class,'create']);
 Route::get('/all-user',[UserController::class,'all']);
 Route::get('/room/{id}',[RoomController::class,'room']);
 Route::get('/delete-room/{id}',[RoomController::class,'delete']);
+Route::post('/search-room', [RoomController::class,'search']);
+
+Route::post('/setup-account/{id}',[UserController::class,'setup']);
+Route::get('/owner/{id}',[UserController::class,'owner']);
+Route::get('/user/{id}',[UserController::class,'user']);
+
+Route::post('/request-email', [RequestEmailController::class,'send']);
 /*
 ;
 

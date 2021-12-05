@@ -12,4 +12,9 @@ class Room extends Model
     protected $casts = [
         'preferences' => 'array',
       ];
+
+    public function user()
+    {
+      return $this->belongsTo(User::class);
+    }
 }

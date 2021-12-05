@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
 
+use function PHPSTORM_META\type;
+
 class UserController extends Controller
 {
     /**
@@ -99,7 +101,8 @@ class UserController extends Controller
             array_push($preferences, $request->preferenced_gender);
             array_push($preferences, $request->preferenced_agerange);
             $user->preferences = $preferences;
-            
+            $user->is_setup = true;
+
             $user->save();
         }
         elseif ($user->type == "owner")
@@ -110,6 +113,7 @@ class UserController extends Controller
             array_push($preferences, $request->preferenced_gender);
             array_push($preferences, $request->preferenced_agerange);
             $user->preferences = $preferences;
+            $user->is_setup = true;
 
             $user->save();
         }
@@ -126,4 +130,24 @@ class UserController extends Controller
     }
 
 
+    public function owner($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->type != "owner")
+        {
+            return response()->json(['bad_request' => 'bad_request'], 400);
+        }
+        $user->rooms = $user->rooms;
+        return $user;
+    }
+
+    public function user($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->type != "user")
+        {
+            return response()->json(['bad_request' => 'bad_request'], 400);
+        }
+        return $user;
+    }
 }
