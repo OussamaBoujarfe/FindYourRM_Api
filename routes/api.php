@@ -5,6 +5,7 @@ use App\Http\Controllers\NewPasswordController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RequestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,15 @@ Route::post('/login',[AuthController::class,'login']);
 Route::post('/forgot-password',[NewPasswordController::class,'forgotPassword']);
 Route::post('/reset-password',[NewPasswordController::class,'reset']);
 Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail']);
+Route::get('/get-sent-requests/{id}',[RequestController::class,'getSentRequests']);
+Route::get('/get-received-requests/{id}',[RequestController::class,'getReceivedRequests']);
+Route::get('/get-pending-requests/{id}',[RequestController::class,'getPendingRequests']);
+Route::get('/get-accepted-requests/{id}',[RequestController::class,'getAcceptedRequests']);
+Route::get('/get-declined-requests/{id}',[RequestController::class,'getDeclinedRequests']);
+Route::post('/new-request',[RequestController::class,'createRequest']);
+Route::post('/decline-request/{id}',[RequestController::class,'declineRequest']);
+Route::post('/accept-request/{id}',[RequestController::class,'acceptRequest']);
+
 
 
 
@@ -45,6 +55,9 @@ Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'ver
 Route::post('/setup-account/{id}',[UserController::class,'setup']);
 Route::post('/add-room/{id}',[RoomController::class,'add']);
 Route::get('/all-room',[RoomController::class,'all']);
+Route::get('/matches/{id}',[UserController::class,'matches']);
+Route::get('/create-match',[MatchController::class,'create']);
+Route::get('/all-user',[UserController::class,'all']);
 Route::get('/room/{id}',[RoomController::class,'room']);
 Route::get('/delete-room/{id}',[RoomController::class,'delete']);
 /*

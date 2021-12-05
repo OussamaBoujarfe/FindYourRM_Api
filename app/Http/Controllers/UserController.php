@@ -99,7 +99,7 @@ class UserController extends Controller
             array_push($preferences, $request->preferenced_gender);
             array_push($preferences, $request->preferenced_agerange);
             $user->preferences = $preferences;
-
+            
             $user->save();
         }
         elseif ($user->type == "owner")
@@ -119,4 +119,11 @@ class UserController extends Controller
         }
         return response()->json(['user' => $user], 200);
     }
+
+    public function all()
+    {
+        return User::all();
+    }
+
+
 }
