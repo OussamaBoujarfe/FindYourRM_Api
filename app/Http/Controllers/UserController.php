@@ -120,7 +120,7 @@ class UserController extends Controller
         return response()->json(['user' => $user], 200);
     }
 
-    public function all()
+    public function getAllUsers()
     {
         return User::all();
     }

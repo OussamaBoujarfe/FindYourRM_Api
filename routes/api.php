@@ -37,6 +37,7 @@ Route::get('/get-declined-requests/{id}',[RequestController::class,'getDeclinedR
 Route::post('/new-request',[RequestController::class,'createRequest']);
 Route::post('/decline-request/{id}',[RequestController::class,'declineRequest']);
 Route::post('/accept-request/{id}',[RequestController::class,'acceptRequest']);
+Route::get('/get-all-users',[UserController::class,'getAllUsers']);
 
 
 
