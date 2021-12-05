@@ -92,7 +92,8 @@ class UserController extends Controller
         if ($user->type == "user")
         {
             $user->gender = $request->gender;
-            $user->birthday = Carbon::parse($request->birthday)->format("Y-d-m");
+
+            $user->birthday = Carbon::createFromFormat('Y-m-d', $request->birthday)->format("Y-m-d");
             $user->passions = $request->passions;
             $user->country = $request->country;
             $user->city = $request->city;
@@ -108,7 +109,7 @@ class UserController extends Controller
         elseif ($user->type == "owner")
         {
             $user->gender = $request->gender;
-            $user->birthday = Carbon::parse($request->birthday)->format("Y-d-m");
+            $user->birthday = Carbon::createFromFormat('Y-m-d', $request->birthday)->format("Y-m-d");
             $preferences = [];
             array_push($preferences, $request->preferenced_gender);
             array_push($preferences, $request->preferenced_agerange);
