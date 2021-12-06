@@ -3,6 +3,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewPasswordController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\RequestEmailController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoomController;
@@ -71,6 +72,12 @@ Route::get('/user/{id}',[UserController::class,'user']);
 Route::get('/match/{id}', [UserController::class,'match']);
 
 Route::post('/request-email', [RequestEmailController::class,'send']);
+
+Route::post('/send-invitation', [InvitationController::class,'send']);
+Route::post('/accept-invitation', [InvitationController::class,'accept']);
+Route::get('/invitation-matches/{id}', [InvitationController::class,'matches']);
+Route::get('/incoming-invitation/{id}', [InvitationController::class,'incoming']);
+Route::get('/accepted-matches/{id}', [InvitationController::class,'accepted_matches']);
 
 
 /*
