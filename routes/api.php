@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/products/search/{name}',[ProductController::class,'search']);
 Route::get('/products',[ProductController::class,'index']);
 Route::get('/products/{id}',[ProductController::class,'show']);
-Route::get('/register',[AuthController::class,'register']);
+Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/forgot-password',[NewPasswordController::class,'forgotPassword']);
 Route::post('/reset-password',[NewPasswordController::class,'reset']);
